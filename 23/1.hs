@@ -1,0 +1,1 @@
+DoubleMe x = x + x
