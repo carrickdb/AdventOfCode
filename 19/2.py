@@ -11,14 +11,17 @@ m = {
     1: lambda x, y: x+y,
     2: lambda x,y: x*y,
 }
-for l in input:
-    l = list(map(int, l.split(",")))
-    l[1] = 12
-    l[2] = 2
-    for i in range(0, len(l), 4):
-        op = l[i]
-        if op == 99:
-            break
-        fun = m[l[i]]
-        l[l[i+3]] = fun(l[l[i+1]], l[l[i+2]])
-    print(l[0])
+input = list(map(int, input[0].split(",")))
+for noun in range(100):
+    for verb in range(100):
+        l = input[:]
+        l[1] = noun
+        l[2] = verb
+        for i in range(0, len(l), 4):
+            op = l[i]
+            if op == 99:
+                break
+            fun = m[l[i]]
+            l[l[i+3]] = fun(l[l[i+1]], l[l[i+2]])
+        if l[0] == 19690720:
+            print(100*noun+verb)
