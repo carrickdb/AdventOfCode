@@ -9,10 +9,9 @@ def getInput(filename):
     return input
 
 def printMapGrid(g):
-    for i in sorted(g.keys(), reverse=True):
-    # for i in sorted(g.keys()):
+    for i in sorted(g.keys()):
         for j in sorted(g[i].keys()):
-            print(g[i][j], end="")
+            print(g[i][j], end=" ")
         print()
 
 def printGridList(g):

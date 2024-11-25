@@ -1,5 +1,10 @@
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+import aoc
+
 nums = []
-with open("input1") as f:
+with open("input") as f:
     for line in f:
         nums.append(int(line.strip()))
 
