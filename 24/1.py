@@ -1,9 +1,4 @@
-import sys
-import os
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-import aoc
-
-# input = aoc.getInput("input")
+data = [*map(int, open('input').read().split())]
 input = aoc.getInput("test-input")
 
 # how often each number from the left list appears in the right list. Calculate a total similarity score by adding up each number in the left list after multiplying it by the number of times that number appears in the right list.
