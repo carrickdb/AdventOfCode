@@ -7,6 +7,17 @@ input = aoc.getInput("input")
 # input = aoc.getInput("test-input")
 
 import re
+
+# Part 1
+total = 0
+for line in input:
+    matches = re.findall(r"mul\((\d{1,3}),(\d{1,3})\)", line)
+    for m1,m2 in matches:
+        total += int(m1) * int(m2)
+print(total)
+
+
+# Part 2
 total = 0
 do = True
 for line in input:
@@ -25,10 +36,3 @@ for line in input:
 
 print(total)
 
-# import re
-# total = 0
-# for line in input:
-#     matches = re.findall(r"mul\((\d{1,3}),(\d{1,3})\)", line)
-#     for m1,m2 in matches:
-#         total += int(m1) * int(m2)
-# print(total)
