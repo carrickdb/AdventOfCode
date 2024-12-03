@@ -25,8 +25,6 @@ for line in input:
 
 print(total)
 
-# No: 9083605
-
 # import re
 # total = 0
 # for line in input:
