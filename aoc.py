@@ -45,3 +45,12 @@ turn_change = {
     'L' : lambda x: [-x[1], x[0]],
     'R': lambda x: [x[1], -x[0]]
 }
+
+def transpose(arr):
+    newArr = []
+    for j in range(len(arr[0])):
+        newRow = []
+        for i in range(len(arr)):
+            newRow.append(arr[i][j])
+        newArr.append(''.join(newRow))
+    return newArr
