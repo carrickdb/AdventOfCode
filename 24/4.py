@@ -9,7 +9,6 @@ g = aoc.getInput("input")
 # g = aoc.getInput("test-input-dots")
 # g = aoc.getInput("wrap")
 
-
 count = 0
 for i in range(1, len(g)-1):
     for j in range(1, len(g[0])-1):
@@ -27,19 +26,11 @@ XMAS = 'XMAS'
 for i in range(len(g)):
     for j in range(len(g[0])):
         count += g[i][j:j+4] == XMAS
-        # if g[i][j:j+4] == XMAS:
-        #     print(i,j, "regular")
         if j-3 >= 0:
             count += g[i][j-3:j+1][::-1] == XMAS
-            # if g[i][j:j-4:-1] == XMAS:
-            #     print(i,j, "backwards")
         count += arrT[j][i:i+4] == XMAS
-        # if arrT[j][i:i+4] == XMAS:
-            # print(i,j, "down")
         if i-3 >= 0:
             count += arrT[j][i-3:i+1][::-1] == XMAS
-            # if arrT[j][i:i-4:-1] == XMAS:
-            #     print(i,j, "upside down")
         f = [
             lambda x,y,z: (x+z, y+z),
             lambda x,y,z: (x-z, y+z),
