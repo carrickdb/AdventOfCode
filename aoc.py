@@ -54,3 +54,6 @@ def transpose(arr):
             newRow.append(arr[i][j])
         newArr.append(''.join(newRow))
     return newArr
+
+def inBounds(i,j,g):
+    return i>=0 and i<len(g) and j>=0 and j<len(g[0])
