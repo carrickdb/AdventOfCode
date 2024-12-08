@@ -7,6 +7,7 @@ import aoc
 input = aoc.getInput("input")
 # input = aoc.getInput("test-input")
 
+# Part 2
 antinodes = set()
 antennas = {}
 for i in range(len(input)):
@@ -27,13 +28,10 @@ for aType, coords in antennas.items():
         di,dj = i - x, j - y
         ni,nj = x-di, y - dj
         while aoc.inBounds(ni,nj,input):
-            # print(ni,nj,di,dj)
             antinodes.add((ni,nj))
             ni,nj = ni-di, nj - dj
-            # print(f"{ni,nj,di,dj,x,y,x-di,y-dj=}")
         ni,nj = i+di, j+dj
         while aoc.inBounds(ni,nj, input):
-            # print(ni,nj)
             antinodes.add((ni,nj))
             ni,nj = ni+di, nj+dj
 
@@ -51,7 +49,7 @@ for i in range(len(input)):
         if curr not in antennas:
             antennas[curr] = []
         antennas[curr].append((i,j))
-print(antennas)
+
 for aType, coords in antennas.items():
     for coord1, coord2 in itertools.combinations(coords, 2):
         i,j = coord1
@@ -63,5 +61,4 @@ for aType, coords in antennas.items():
         ni,nj = i+di, j+dj
         if aoc.inBounds(ni,nj, input):
             antinodes.add((ni,nj))
-# print(antinodes)
 print(len(antinodes))
