@@ -4,10 +4,10 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import aoc
 import re
 
-# with open("test-input") as f:
-# with open("test-larger") as f:
-with open("test-input-part2") as f:
-# with open("input") as f:
+# with open("test-input-15") as f:
+# with open("test-larger-15") as f:
+# with open("test-input-part2-15") as f:
+with open("input-15") as f:
     input = f.read()
 
 m, directions = input.split("\n\n")
@@ -44,26 +44,31 @@ ci,cj = si,sj
 for row in directions:
     for d in row.strip():
         di,dj = dirmap[d]
-        ni,nj = ci+di,cj+dj
+        # print(ci,cj, d)
         boxes = set()
-        q = deque([(ni,nj)])
+        q = deque([(ci,cj)])
         wall = False
         while q:
             lq = len(q)
+            # print(q)
             for _ in range(lq):
                 i,j = q.popleft()
-                if g[i][j] == "#":
+                curr = g[i][j]
+                # print(i,j,curr)
+                if curr == "#":
                     wall = True
                     break
-                if g[i][j] == "." or (i,j) in boxes:
+                if curr == "." or (i,j, curr) in boxes:
                     continue
-                boxes.add((i,j,g[i][j]))
+                boxes.add((i,j,curr))
                 childi,childj = i+di, j+dj
+                child = g[childi][childj]
+                # print(f"{child=}")
                 q.append((childi, childj))
                 if d == "^" or d == "v":
                     if g[childi][childj] == "]":
                         q.append((childi,childj-1))
-                    else:
+                    elif g[childi][childj] == "[":
                         q.append((childi,childj+1))
             if wall:
                 break
@@ -74,19 +79,21 @@ for row in directions:
             g[bi][bj] = "."
         for bi,bj,c in boxes:
             g[bi+di][bj+dj] = c
+        ni,nj = ci+di, cj+dj
         g[ni][nj] = "@"
         ci,cj = ni,nj
-        aoc.printGridList(g)
-        print()
+        # aoc.printGridList(g)
+        # print()
 total = 0
 for i in range(len(g)):  # TODO
     j = 0
     while j < len(g[0]):
         curr = g[i][j]
         if curr == "[":
-            closestv = min(len(g)-i-1, i)
-            closesth = min(j, len(g[0])-j-2)
-            total += closestv*100+closesth
+            # closestv = min(len(g)-i-1, i)
+            # closesth = min(j, len(g[0])-j-2)
+            # total += closestv*100+closesth
+            total += i*100+j
             j += 1
         j += 1
 print(total)
