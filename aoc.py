@@ -1,3 +1,5 @@
+from typing import List
+
 dirs = [[0,1], [0,-1], [-1, 0], [1,0]]
 diagDirs = [[0,1], [0,-1], [-1, 0], [1,0], [-1, -1], [1, 1], [-1, 1], [1, -1]]
 
@@ -41,10 +43,11 @@ def printGraph(g):
     for k,v in g.items():
         print(f"{k}: {v}")
 
-turn_change = {
-    'L' : lambda x: [-x[1], x[0]],
-    'R': lambda x: [x[1], -x[0]]
-}
+def turnRight(c):
+    return c[1], -c[0]
+
+def turnLeft(c):
+    return -c[1], c[0]
 
 def transpose(arr):
     newArr = []
@@ -55,5 +58,36 @@ def transpose(arr):
         newArr.append(''.join(newRow))
     return newArr
 
-def inBounds(i,j,g):
+def inBounds(c,g):
+    i,j = c
     return i>=0 and i<len(g) and j>=0 and j<len(g[0])
+
+def nextStep(i,j,g):
+    for di,dj in dirs:
+        ni,nj = di+i,dj+j
+        if inBounds(ni,nj,g):
+            yield ni,nj
+
+def getNext(c, d):
+    return c[0]+d[0], c[1]+d[1]
+
+def mapint(l: List[str]):
+    return list(map(int, l))
+
+dirmap = {
+    "^": [-1,0],
+    ">": [0,1],
+    "<": [0,-1],
+    "v": [1,0]
+}
+
+def iterateThroughGraph(g):
+    for i in range(len(g)):
+        for j in range(len(g[0])):
+            yield i,j
+
+def numRows(g):
+    return range(len(g))
+
+def numCols(g):
+    return range(len(g[0]))
