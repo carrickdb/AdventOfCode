@@ -3,24 +3,24 @@ import os
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import aoc
 
-# input = aoc.getInput("~/input")
-input = aoc.getInput("test-input")
+input = aoc.getInput(os.getenv("HOME") + "/input")
+# input = aoc.getInput("test-input")
 # input = aoc.getInput("second-example")
 
 S = (len(input)-2, 1)
 E = (1, len(input[0])-2)
 currdir = (0,1)
-import heapq
+import heapq, math
 prev = {}
 dist = {}
 v = set()
-
+bestscore = math.inf
 h = [(0, S, currdir)]
 while h:
     score, coords, d = heapq.heappop(h)
     node = (coords, d)
     if coords == E:
-        print(score)
+        bestscore = min(bestscore, score)
     if node in v:
         continue
     v.add(node)
@@ -30,17 +30,36 @@ while h:
             newNode = (n, direction)
             newScore = score+scoreincrease
             heapq.heappush(h, (newScore, n, direction))
+            if n==E and newNode in dist:
+                print(f"{dist[newNode]==newScore=}")
             if newNode not in dist or dist[newNode] > newScore:
                 prev[newNode] = set([node])
                 dist[newNode] = newScore
             elif dist[newNode]==newScore:
                 prev[newNode].add(node)
 
+ends = [node for node in prev if node[0]==E and dist[node]==bestscore]
+
+bestpaths = set()
+
+def getpath(curr):
+    while True:
+        bestpaths.add(curr[0])
+        if curr not in prev:
+            return # found the start
+        parents = list(prev[curr])
+        if len(parents) == 1:
+            curr = parents[0]
+        else:
+            break
+    for parent in parents:
+        getpath(parent)
 
 
+for end in ends:
+    getpath(end)
 
-
-
+print(len(bestpaths))
 
 
 
