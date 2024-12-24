@@ -74,6 +74,9 @@ def getNext(c, d):
 def mapint(l: List[str]):
     return list(map(int, l))
 
+def mapstr(l: List[int]):
+    return list(map(str, l))
+
 dirmap = {
     "^": [-1,0],
     ">": [0,1],
@@ -91,3 +94,7 @@ def numRows(g):
 
 def numCols(g):
     return range(len(g[0]))
+
+def getByTwos(l):
+    for i in range(0,len(l),2):
+        return l[i],l[i+1]
