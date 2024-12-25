@@ -68,6 +68,11 @@ def nextStep(i,j,g):
         if inBounds(ni,nj,g):
             yield ni,nj
 
+def nextStep(c):
+    i,j = c
+    for di,dj in dirs:
+        yield di+i,dj+j
+
 def getNext(c, d):
     return c[0]+d[0], c[1]+d[1]
 
