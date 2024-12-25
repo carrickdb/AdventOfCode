@@ -40,8 +40,8 @@ def getNextSteps(i,j,g):
     return ns
 
 def printGraph(g):
-    for k,v in g.items():
-        print(f"{k}: {v}")
+    for row in g:
+        print(''.join(mapstr(row)))
 
 def turnRight(c):
     return c[1], -c[0]
@@ -62,11 +62,22 @@ def inBounds(c,g):
     i,j = c
     return i>=0 and i<len(g) and j>=0 and j<len(g[0])
 
-def nextStep(i,j,g):
+def nextStepInBounds(i,j,g):
     for di,dj in dirs:
         ni,nj = di+i,dj+j
         if inBounds(ni,nj,g):
             yield ni,nj
+
+def nextStepInBounds(c,g):
+    i,j = c
+    for di,dj in dirs:
+        ni,nj = di+i,dj+j
+        if inBounds((ni,nj),g):
+            yield ni,nj
+
+def getGVal(c,g):
+    i,j = c
+    return g[i][j]
 
 def nextStep(c):
     i,j = c

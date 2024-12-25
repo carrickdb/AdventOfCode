@@ -27,12 +27,6 @@ for design in stuff[2:]:
 print(total)
 
 
-
-
-
-
-
-
 ## Part 1
 # patterns = stuff[0].split(", ")
 # possible = 0
