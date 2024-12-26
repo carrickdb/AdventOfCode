@@ -48,35 +48,22 @@ def checkCheat(n, prev, steps):
         if cheatRes > 49:
             cheatResults[cheatRes].add((n,prev))
 
-from collections import deque
-def bfs(g, start):
-    q = deque()
-    q.append(start)
-    steps = 0
-    v = set()
-    while steps <= 20:
-        lq = len(q)
-        for _ in range(lq):
-            curr = q.popleft()
-            if curr in v:
-                continue
-            v.add(curr)
-            checkCheat(curr, start, steps)
-            for n in aoc.nextStepInBounds(curr, g):
-                if n not in v:
-                    q.append(n)
-        steps += 1
-
 cheatIndex = 0
+numSteps = 20
 while cheatIndex<tracklen:
     cheat = path[cheatIndex]
-    for n in aoc.nextStepInBounds(cheat,g):
-        bfs(g,cheat)
+    ci,cj = cheat
+    for i in range(numSteps+1):
+        for j in range(numSteps-i+1):
+            for di,dj in [(1,1), (-1,1), (1,-1), (-1,-1)]:
+                cheatEnd = (ci+i*di, cj+j*dj)
+                if aoc.inBounds(cheatEnd, g):
+                    checkCheat(cheatEnd, cheat, i+j)
     cheatIndex += 1
 
 total = 0
 for timeSaved, cheats in sorted(cheatResults.items()):
-    # print(f"{len(cheats)} cheats save {timeSaved} picoseconds")
+    print(f"{len(cheats)} cheats save {timeSaved} picoseconds")
     if timeSaved >= 100:
         total += len(cheats)
 
