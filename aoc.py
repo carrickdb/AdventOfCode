@@ -114,3 +114,35 @@ def numCols(g):
 def getByTwos(l):
     for i in range(0,len(l),2):
         return l[i],l[i+1]
+
+# This is more of a template to start with than a function to call
+def bfs(g, start):
+    from collections import deque
+    q = deque()
+    q.append(start)
+    steps = 0
+    v = set()
+    while q:
+        lq = len(q)
+        for _ in range(lq):
+            curr = q.popleft()
+            if curr in v:
+                continue
+            v.add(curr)
+            for n in nextStepInBounds(curr, g):
+                if n not in v:
+                    q.append(n)
+        steps += 1
+
+# This is more of a template to start with than a function to call
+def dfs(s):
+    v = set()
+    stack = [s]
+    while stack:
+        curr = stack.pop()
+        if curr in v:
+            continue
+        v.add(curr)
+        for di,dj in dirs:
+            ni,nj = di+curr[0],dj+curr[1]
+            stack.append((ni,nj))
