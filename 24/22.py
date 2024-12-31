@@ -12,7 +12,7 @@ PRUNE = 16777216  # 2^24 keep last 24 digits
 def getNextSecretNumber(num):
     num = (num ^ (num * 64)) % PRUNE  # << 6
     num = (num ^ (num//32)) % PRUNE   # >> 5
-    num = (num ^ (num*2048)) % PRUNE # << 11
+    num = (num ^ (num*2048)) % PRUNE  # << 11
     return num
 
 m = defaultdict(int)
