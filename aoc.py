@@ -7,7 +7,7 @@ def getInput(filename):
     input = []
     with open(filename) as f:
         for l in f:
-            input.append(l.strip())
+            input.append(l.rstrip('\n'))
     return input
 
 def printMapGrid(g):
